@@ -1,4 +1,4 @@
-# PeopleData Personal DataSpace 
+# Personal Data Center 
 
 这是配置个人数据中心（PDC），mywallet/KMS、PDSS，以及启动服务的步骤说明。
 
