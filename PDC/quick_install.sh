@@ -1,14 +1,12 @@
 #!/bin/bash
-# Author: jerry.zhang<jerry.zhang.bill@gmail.com>
+# jerry.zhang
 
 echo "***************************** quick install ****************************"
 echo "this quick install will install basic software:"
-echo " 1. docker and docker-compose"
+echo " 1. docker"
 echo " 2. nodejs"
-ech0 " 3. snap"
-echo " 4. kubectl and helm"
-echo " 5. minikube"
-echo " 6. kubeadm (option)"
+echo " 3. kubectl"
+echo " 4. minikube"
 
 echo "************************************************************************"
 
@@ -57,8 +55,7 @@ sudo usermod -aG docker $USER
 # install docker-compse
 
 sudo apt-get update
-sudo apt-get install docker-compose-plugin
-apt-cache madison docker-compose-plugin
+sudo apt-get install docker-compose
 
 sudo apt-get install docker-compose-plugin=
 
@@ -73,14 +70,18 @@ echo "nodejs installed!"
 
 echo "********************** install kubectl ******************"
 
-# install snapd
 sudo apt update
 sudo apt install snapd
 
-# install kubectl using snap
 snap install kubectl --classic
+alias kubectl="minikube kubectl --"
 
 kubectl version --client
+
+
+# install go
+sudo apt install golang-go 
+ 
 
 echo "kubectl installed"
 
@@ -126,5 +127,7 @@ esac
 #sudo apt-get update
 #sudo apt-get install -y kubelet kubeadm 
 #sudo apt-mark hold kubelet kubeadm
+
+
 
 
