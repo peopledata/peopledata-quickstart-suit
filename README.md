@@ -53,12 +53,8 @@ $ ./config_pdc.sh
     [b] unattach metachain: 完全私有的个人链。
 
 
-
-   
-
-
 ## 第三步：安装应用App
-安装个人数据空间管理系统（PDSS）。
+必选应用：个人数据空间管理系统（PDSS）。
 - PDSS包括：
     - 存储: 可选：IPFS/pds（raft等HA云存储）[todo] 
     - 数据资产管理back-end: [todo]
@@ -67,11 +63,19 @@ $ ./config_pdc.sh
     - datomspod【可选】：数据资产安全、可信和隐私增强保护的交付工具。[done]
 - 每个服务都提供endpoint,向前端提供服务。
 
+可选应用：数据DAO（dataDAO）
+- dataDAO:
+    - 由某一个赞助者、支持者发起设立的数据合作组织；
+    - 授权使用个人的某类数据资产;
+    - 以dataNFT的方式向DAO转入数据资产。
+
+
 
 ## 第四步：back-end启动/运行
 运行自动化脚本，初始化和启动所有服务。[todo]
 
 ```bash
+$ cd back_end   
 $ ./start.sh   //启动全部服务  
 $ ./stop.sh    //停止服务 --flag选项
 $ ./resume.sh  //恢复服务 --flag选项
