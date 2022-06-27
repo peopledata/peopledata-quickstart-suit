@@ -19,17 +19,21 @@
     - minikube 
 
 ```bash
-./quick_install.sh [done]
-
+$ cd pdc
+$ ./quick_install.sh [done]
 ```
 
 ### 第二步：配置个人数据中心环境
-主要完成个人KMS、区块链和数据空间的安装和配置。
+主要完成个人KMS、个人区块链和数据空间的安装和配置。
     - vault
     - consul
     - datomspace
-    - metachain-quorum-quickstart
+    - personal-blockchain 
     - k8s pod配置
+
+```bash
+$ ./config_myPDC.sh
+```
 
 初始配置：
     - DID
