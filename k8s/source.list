@@ -1,0 +1,11 @@
+# 用阿里的镜像安装源
+# 更新 /etc/apt/sources.list为 
+deb http://mirrors.aliyun.com/ubuntu/ xenial main restricted
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates main restricted
+deb http://mirrors.aliyun.com/ubuntu/ xenial universe
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates universe
+deb http://mirrors.aliyun.com/ubuntu/ xenial multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-updates multiverse
+deb http://mirrors.aliyun.com/ubuntu/ xenial-backports main restricted universe multiverse
+# kubeadm及kubernetes组件安装源
+deb https://mirrors.aliyun.com/kubernetes/apt kubernetes-xenial main
