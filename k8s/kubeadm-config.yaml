@@ -1,0 +1,56 @@
+---
+apiVersion: kubeadm.k8s.io/v1beta2
+bootstrapTokens:
+- groups:
+  - system:bootstrappers:kubeadm:default-node-token
+  ttl: 24h0m0s
+  usages:
+  - signing
+  - authentication
+kind: InitConfiguration
+localAPIEndpoint:
+  # 这里的地址即为初始化的控制平面第一个节点的IP地址；
+  advertiseAddress: 1.13.253.16
+  bindPort: 6443
+nodeRegistration:
+  criSocket: /var/run/dockershim.sock
+  # 第一个控制平面节点的主机名称；
+  name: 0x1-k8s-master
+  taints:
+  - effect: NoSchedule
+    key: node-role.kubernetes.io/master
+---
+apiServer:
+  timeoutForControlPlane: 4m0s
+apiVersion: kubeadm.k8s.io/v1beta2
+# 控制平面的接入端点，我们这里选择适配到 apiserver.host.com 这一域名上
+controlPlaneEndpoint: "apiserver.0x1-k8s-master:6443"
+certificatesDir: /etc/kubernetes/pki
+clusterName: kubernetes
+controllerManager: {}
+dns:
+  type: CoreDNS
+etcd:
+  local:
+    # 配置 etcd 数据存储路径
+    dataDir: /data/etcd
+# 配置镜像拉取站点
+imageRepository: registry.aliyuncs.com/google_containers
+kind: ClusterConfiguration
+# 版本号要与部署的目标版本保持一致
+kubernetesVersion: v1.25.2
+networking:
+  # 要使用的集群域名，默认为 cluster.local
+  dnsDomain: cluster.local
+  # Pod 的网络地址段
+  podSubnet: 172.16.0.0/16
+  # Service 的网络地址段
+  serviceSubnet: 192.168.0.0/16
+scheduler: {}
+---
+apiVersion: kubeproxy.config.k8s.io/v1alpha1
+kind: KubeProxyConfiguration
+# 用于配置 kube-proxy 上为 Service 指定的代理模式，默认为 iptables
+mode: "ipvs"
+ipvs:
+  scheduler: "nq"
