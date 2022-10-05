@@ -12,3 +12,5 @@ geth --datadir data \
 --http.api admin,eth,debug,miner,net,txpool,personal,web3,istanbul --ws.api admin,eth,debug,miner,net,txpool,personal,web3,istanbul \
 --unlock ${ADDRESS} --allow-insecure-unlock --password ./data/keystore/accountPassword \
 --port 30300
+# if deployment in same host, need change rpc port.
+--authrpc.port 8552 
