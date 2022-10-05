@@ -1,3 +1,6 @@
+#!/bin/bash
+# jerry.zhang
+
 geth --datadir data init data/genesis.json
 export ADDRESS=$(grep -o '"address": *"[^"]*"' ./data/keystore/accountKeystore | grep -o '"[^"]*"$' | sed 's/"//g')
 export PRIVATE_CONFIG=ignore
