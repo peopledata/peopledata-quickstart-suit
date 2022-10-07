@@ -5,8 +5,6 @@ echo "***************************** quick install ****************************"
 echo "this quick install will install basic software:"
 echo " 1. docker"
 echo " 2. nodejs"
-echo " 3. kubectl"
-echo " 4. minikube"
 
 echo "************************************************************************"
 
@@ -38,26 +36,16 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
-sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo apt-get install docker-compose-plugin=2.3.3~ubuntu-focal
+sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt-get install -y docker-compose-plugin=2.3.3~ubuntu-focal
 
 
 echo "Check if docker installed, you could run
 
-$ sudo docker run hello-world
-
-"
 
 # let docker run without root privaledge
 
 sudo usermod -aG docker $USER
-
-# install docker-compse
-
-sudo apt-get update
-sudo apt-get install docker-compose
-
-sudo apt-get install docker-compose-plugin=
 
 
 echo "*********************** install nodejs *********************"
@@ -69,18 +57,8 @@ node --version
 echo "nodejs installed!"
 
 
-echo "******************** install kubeadm/kubelet/kubectl ******************"
-
-
-
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
-
-
-echo "minikube installed!" 
-echo "reboot your machine, then start work!"
-
 # install helm using snap
+sudo apt install snapd
 
 sudo snap install helm --classic
 
