@@ -5,6 +5,8 @@ echo "***************************** quick install ****************************"
 echo "this quick install will install basic software:"
 echo " 1. docker"
 echo " 2. nodejs"
+echo " 3. kubectl"
+echo " 4. k8s"
 
 echo "************************************************************************"
 
@@ -36,51 +38,48 @@ echo \
   $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
 sudo apt-get update
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io docker-compose-plugin
-sudo apt-get install -y docker-compose-plugin=2.3.3~ubuntu-focal
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-compose-plugin
+sudo apt-get install docker-compose-plugin=2.3.3~ubuntu-focal
 
-
-echo "Check if docker installed, you could run
 
 
 # let docker run without root privaledge
 
 sudo usermod -aG docker $USER
 
+# install docker-compse
+
+sudo apt-get update
+sudo apt-get install docker-compose
+
+sudo apt-get install docker-compose-plugin=
+
 
 echo "*********************** install nodejs *********************"
 
-curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
+curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
 sudo apt install nodejs
 node --version
 
 echo "nodejs installed!"
 
 
-# install helm using snap
-sudo apt install snapd
 
-sudo snap install helm --classic
+# install go
+sudo apt install golang-go 
+ 
 
 sudo apt install jq
 
 
 
-
-#echo "******************** install kubeadm kubelet **************”
+echo "******************** install kubeadm kubelet kubectl**************"
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
-
-
-#echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-sudo curl https://mirrors.aliyun.com/kubernetes/apt/doc/apt-key.gpg | sudo apt-key add -
-
-sudo add-apt-repository "deb https://mirrors.aliyun.com/kubernetes/apt/ kubernetes-xenial main"
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
 sudo apt-get update
-sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-get install -y kubelet kubeadm kubectl 
 sudo apt-mark hold kubelet kubeadm kubectl
-
-sudo swapoff -a
