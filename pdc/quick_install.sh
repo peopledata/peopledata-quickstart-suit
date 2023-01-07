@@ -5,8 +5,8 @@ echo "***************************** quick install ****************************"
 echo "this quick install will install basic software:"
 echo " 1. docker"
 echo " 2. nodejs"
-echo " 3. kubectl"
-echo " 4. minikube"
+echo " 3. kubectl kubeadm kubelet"
+echo " 4. ipfs"
 
 echo "************************************************************************"
 
@@ -68,65 +68,28 @@ node --version
 
 echo "nodejs installed!"
 
-echo "********************** install kubectl ******************"
+echo "******************** install kubeadm kubelet kubectl **************”
+sudo apt-get update
+sudo apt-get install -y apt-transport-https ca-certificates
+sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
 
-sudo apt update
-sudo apt install snapd
+echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
 
-snap install kubectl --classic
-alias kubectl="minikube kubectl --"
+sudo apt-get update
+sudo apt-get install -y kubelet kubeadm kubectl
+sudo apt-mark hold kubelet kubeadm kubectl
 
-kubectl version --client
+echo "************** install IPFS *************"
+wget https://dist.ipfs.tech/kubo/v0.17.0/kubo_v0.17.0_linux-amd64.tar.gz &
 
+tar -xvzf kubo_v0.17.0_linux-amd64.tar.gz &
 
-# install go
-sudo apt install golang-go 
- 
+cd kubo & sudo bash install.sh
 
-echo "kubectl installed"
-
-
-echo "******************** install minikube ******************"
-
-
-
-curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
-sudo install minikube-linux-amd64 /usr/local/bin/minikube
+echo "check IPFS installed or not?"
+ipfs --version
 
 
-echo "minikube installed!" 
-echo "reboot your machine, then start work!"
-
-# install helm using snap
-
-sudo snap install helm --classic
-
-sudo apt install jq
-
-
-read -n1 -p " Do you want to reboot now [y/n]" ans
-
-case $ans in
-        (Y | y )
-                echo "fine, let's reboot"
-		sudo reboot
-        (N | n)
-                exit 0;;
-esac
-
-
-
-
-#echo "******************** install kubeadm kubelet **************”
-#sudo apt-get update
-#sudo apt-get install -y apt-transport-https ca-certificates
-#sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
-
-#echo "deb [signed-by=/usr/share/keyrings/kubernetes-archive-keyring.gpg] https://apt.kubernetes.io/ kubernetes-xenial main" | sudo tee /etc/apt/sources.list.d/kubernetes.list
-
-#sudo apt-get update
-#sudo apt-get install -y kubelet kubeadm 
-#sudo apt-mark hold kubelet kubeadm
 
 
 
