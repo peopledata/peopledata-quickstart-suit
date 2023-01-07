@@ -84,7 +84,8 @@ wget https://dist.ipfs.tech/kubo/v0.17.0/kubo_v0.17.0_linux-amd64.tar.gz
 
 tar -xvzf kubo_v0.17.0_linux-amd64.tar.gz 
 
-cd kubo & sudo bash install.sh
+cd kubo 
+sudo bash install.sh
 
 echo "check IPFS installed or not?"
 ipfs --version
