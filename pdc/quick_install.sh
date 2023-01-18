@@ -68,7 +68,7 @@ node --version
 
 echo "nodejs installed!"
 
-echo "******************** install kubeadm kubelet kubectl **************”
+echo "******************** install kubeadm kubelet kubectl **************"
 sudo apt-get update
 sudo apt-get install -y apt-transport-https ca-certificates
 sudo curl -fsSLo /usr/share/keyrings/kubernetes-archive-keyring.gpg https://packages.cloud.google.com/apt/doc/apt-key.gpg
